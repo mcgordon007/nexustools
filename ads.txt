@@ -1,0 +1,2 @@
+# ads.txt for 88669988.xyz
+google.com, pub-2485720330662082, DIRECT, f08c47fec0942fa0

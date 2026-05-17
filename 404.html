@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#0ea5e9" />
+		<meta name="author" content="NexusTools" />
+		<meta name="robots" content="index, follow" />
+		<meta name="googlebot" content="index, follow" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<script>
+			// Prevent FOUC: apply dark mode class before first paint
+			(function() {
+				var stored = localStorage.getItem('theme');
+				if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+					document.documentElement.classList.add('dark');
+				}
+			})();
+		</script>
+		<link href="/_app/immutable/entry/start.C-Li27Yr.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/DeXUCzox.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/CDXV-npO.js" rel="modulepreload">
+		<link href="/_app/immutable/entry/app.COetJPVV.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/Zq3JsvH2.js" rel="modulepreload">
+		<link href="/_app/immutable/chunks/Q94VlVm2.js" rel="modulepreload">
+		<link href="/_app/immutable/nodes/0.Cl3ZNS8y.js" rel="modulepreload">
+		
+		<link href="/_app/immutable/assets/0.Cq6CR8MN.css" rel="stylesheet">
+		<!-- Google AdSense -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2485720330662082" crossorigin="anonymous"></script>
+	</head>
+	<body data-sveltekit-preload-data="hover" class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_8rp4qg = {
+						base: ""
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/_app/immutable/entry/start.C-Li27Yr.js"),
+						import("/_app/immutable/entry/app.COetJPVV.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
