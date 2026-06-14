@@ -1,0 +1,116 @@
+@import "./tailwindcss.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary-600);
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-700);
+  }
+  
+  .btn-secondary {
+    padding: 0.5rem 1rem;
+    background-color: #e5e7eb;
+    color: #111827;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .dark .btn-secondary {
+    background-color: #374151;
+    color: #f3f4f6;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #d1d5db;
+  }
+  
+  .dark .btn-secondary:hover {
+    background-color: #4b5563;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  
+  .dark .card {
+    background-color: #1f2937;
+  }
+  
+  .card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: #111827;
+    outline: none;
+    transition: all 0.2s;
+  }
+  
+  .dark .input-field {
+    border-color: #4b5563;
+    background-color: #1f2937;
+    color: #f3f4f6;
+  }
+  
+  .input-field:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+  }
+  
+  .textarea-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: #111827;
+    outline: none;
+    transition: all 0.2s;
+    resize: vertical;
+    min-height: 200px;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+  
+  .dark .textarea-field {
+    border-color: #4b5563;
+    background-color: #1f2937;
+    color: #f3f4f6;
+  }
+  
+  .textarea-field:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+  }
+}

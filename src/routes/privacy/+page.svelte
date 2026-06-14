@@ -1,0 +1,52 @@
+<script lang="ts">
+  import SEO from '$lib/components/SEO.svelte';
+</script>
+
+<SEO
+  title="Privacy Policy"
+  description="Privacy policy for NexusTools - your free online developer toolkit."
+  url="https://88669988.xyz/privacy"
+/>
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Privacy Policy</h1>
+  
+  <div class="prose dark:prose-invert max-w-none">
+    <p class="text-gray-600 dark:text-gray-400">
+      Last updated: May 2025
+    </p>
+    
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">Data Collection</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      NexusTools is designed with privacy in mind. Most of our tools run entirely in your browser using client-side JavaScript. Your tool input data is processed locally and is not sent to our servers.
+    </p>
+    
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">Advertising</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      We use Google AdSense to display advertisements on our website. Google AdSense may use cookies and similar technologies to serve ads based on your prior visits to our website or other websites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet.
+    </p>
+    <p class="text-gray-600 dark:text-gray-400">
+      You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">Google Ads Settings</a>.
+    </p>
+    
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">Cookies</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      We use local storage to save your theme preference (light/dark mode). This data is stored only on your device and is not transmitted to any servers. For more details on how cookies are used, please see our <a href="/cookies" class="text-primary-600 hover:underline">Cookie Policy</a>.
+    </p>
+    
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">Third-Party Services</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      Some tools may use third-party APIs (e.g., IP address lookup). These services may have their own privacy policies and may collect data independently. We encourage you to review their privacy policies.
+    </p>
+    
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">Changes</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      We may update this privacy policy from time to time. Any changes will be posted on this page with an updated revision date.
+    </p>
+    
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">Contact Us</h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      If you have any questions about this Privacy Policy, please contact us through our <a href="/contact" class="text-primary-600 hover:underline">Contact page</a>.
+    </p>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+<script lang="ts">
+  import SEO from '$lib/components/SEO.svelte';
+  
+  // Tool data
+  interface Tool {
+    name: string;
+    description: string;
+    href: string;
+    category: string;
+    icon: string;
+  }
+  
+  const tools: Tool[] = [
+    // Developer Tools
+    { name: 'JSON Formatter', description: 'Format, beautify, and validate JSON data with syntax highlighting', href: '/tools/json-formatter', category: 'Developer', icon: 'json' },
+    { name: 'Base64 Encoder/Decoder', description: 'Encode and decode Base64 strings quickly and easily', href: '/tools/base64-encoder', category: 'Developer', icon: 'code' },
+    { name: 'URL Encoder/Decoder', description: 'Encode and decode URLs for safe transmission', href: '/tools/url-encoder', category: 'Developer', icon: 'link' },
+    { name: 'Hash Generator', description: 'Generate MD5, SHA-1, SHA-256 hashes from text', href: '/tools/hash-generator', category: 'Developer', icon: 'hash' },
+    { name: 'UUID Generator', description: 'Generate random UUIDs/GUIDs instantly', href: '/tools/uuid-generator', category: 'Developer', icon: 'key' },
+    { name: 'JWT Decoder', description: 'Decode and inspect JWT tokens', href: '/tools/jwt-decoder', category: 'Developer', icon: 'token' },
+    { name: 'Regex Tester', description: 'Test and debug regular expressions in real-time', href: '/tools/regex-tester', category: 'Developer', icon: 'regex' },
+    { name: 'HTML Entity Encoder', description: 'Encode and decode HTML entities', href: '/tools/html-entity-encoder', category: 'Developer', icon: 'html' },
+    { name: 'YAML to JSON Converter', description: 'Convert YAML to JSON and vice versa', href: '/tools/yaml-json-converter', category: 'Developer', icon: 'convert' },
+    { name: 'Diff Checker', description: 'Compare two texts and highlight differences', href: '/tools/diff-checker', category: 'Developer', icon: 'diff' },
+    { name: 'Cron Job Generator', description: 'Generate cron expressions easily', href: '/tools/cron-generator', category: 'Developer', icon: 'cron' },
+    { name: 'Code Beautifier', description: 'Beautify and format code in multiple languages', href: '/tools/code-beautifier', category: 'Developer', icon: 'code' },
+    
+    // Text Tools
+    { name: 'Word Counter', description: 'Count words, characters, sentences, and paragraphs', href: '/tools/word-counter', category: 'Text', icon: 'text' },
+    { name: 'Case Converter', description: 'Convert text between different cases', href: '/tools/case-converter', category: 'Text', icon: 'case' },
+    { name: 'Lorem Ipsum Generator', description: 'Generate placeholder text for designs', href: '/tools/lorem-ipsum', category: 'Text', icon: 'lorem' },
+    { name: 'Remove Duplicates', description: 'Remove duplicate lines from text', href: '/tools/remove-duplicates', category: 'Text', icon: 'dedupe' },
+    { name: 'Text Reverser', description: 'Reverse text characters or words', href: '/tools/text-reverser', category: 'Text', icon: 'reverse' },
+    { name: 'Character Counter', description: 'Count characters with and without spaces', href: '/tools/character-counter', category: 'Text', icon: 'char' },
+    { name: 'Text Sorter', description: 'Sort lines of text alphabetically', href: '/tools/text-sorter', category: 'Text', icon: 'sort' },
+    { name: 'Morse Code Translator', description: 'Translate text to and from Morse code', href: '/tools/morse-code', category: 'Text', icon: 'morse' },
+    
+    // Security Tools
+    { name: 'Password Generator', description: 'Generate secure random passwords', href: '/tools/password-generator', category: 'Security', icon: 'password' },
+    { name: 'QR Code Generator', description: 'Generate QR codes from text or URLs', href: '/tools/qr-code-generator', category: 'Security', icon: 'qr' },
+    { name: 'Color Picker', description: 'Pick colors and get HEX, RGB, HSL values', href: '/tools/color-picker', category: 'Security', icon: 'color' },
+    { name: 'IP Address Lookup', description: 'Look up information about IP addresses', href: '/tools/ip-lookup', category: 'Security', icon: 'ip' },
+    { name: 'AES Encryption', description: 'Encrypt and decrypt text with AES', href: '/tools/aes-encryption', category: 'Security', icon: 'encrypt' },
+    
+    // Image Tools
+    { name: 'Image Resizer', description: 'Resize images to custom dimensions', href: '/tools/image-resizer', category: 'Image', icon: 'resize' },
+    { name: 'Image Compressor', description: 'Compress images without losing quality', href: '/tools/image-compressor', category: 'Image', icon: 'compress' },
+    { name: 'Image to Base64', description: 'Convert images to Base64 strings', href: '/tools/image-to-base64', category: 'Image', icon: 'img64' },
+    { name: 'Favicon Generator', description: 'Generate favicons from images', href: '/tools/favicon-generator', category: 'Image', icon: 'favicon' },
+    { name: 'Placeholder Image', description: 'Generate placeholder images', href: '/tools/placeholder-image', category: 'Image', icon: 'placeholder' }
+  ];
+  
+  const categories = ['Developer', 'Text', 'Security', 'Image'];
+  
+  function getIconSVG(icon: string): string {
+    const icons: Record<string, string> = {
+      json: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />',
+      code: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />',
+      link: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />',
+      hash: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h16M4 15h16" />',
+      key: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />',
+      token: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />',
+      regex: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />',
+      html: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />',
+      convert: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />',
+      diff: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />',
+      cron: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />',
+      text: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />',
+      case: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />',
+      lorem: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h6" />',
+      dedupe: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />',
+      reverse: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />',
+      char: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h16M4 15h16" />',
+      sort: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />',
+      morse: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />',
+      password: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />',
+      qr: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />',
+      color: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />',
+      ip: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />',
+      encrypt: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />',
+      resize: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />',
+      compress: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />',
+      img64: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />',
+      favicon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />',
+      placeholder: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />'
+    };
+    return icons[icon] || icons.code;
+  }
+  
+  function getCategoryColor(category: string): string {
+    const colors: Record<string, string> = {
+      Developer: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+      Text: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+      Security: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+      Image: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300'
+    };
+    return colors[category] || colors.Developer;
+  }
+</script>
+
+<SEO 
+  title="NexusTools"
+  description="Free online developer tools: JSON formatter, Base64 encoder, URL encoder, password generator, QR code generator, and 30+ more utilities. Fast, private, and free to use."
+  keywords="online tools, developer tools, JSON formatter, Base64 encoder, URL encoder, password generator, QR code, word counter, hash generator, UUID generator"
+  url="https://88669988.xyz/"
+/>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        Your All-in-One<br />
+        <span class="text-primary-200">Developer Toolkit</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-primary-100 mb-8 max-w-3xl mx-auto">
+        30+ free online tools for developers. Format JSON, encode strings, generate passwords, and more. Fast, private, and free to use.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#tools" class="btn-primary bg-white text-primary-700 hover:bg-primary-50">
+          Browse Tools
+        </a>
+        <a href="/tools/json-formatter" class="btn-secondary bg-primary-800 text-white hover:bg-primary-700 border border-primary-500">
+          Try JSON Formatter
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="bg-white dark:bg-gray-800 py-8 border-b border-gray-200 dark:border-gray-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">30+</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Free Tools</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">100%</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Free Forever</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">100%</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Client-Side</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">Fast</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Instant Results</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tools Section -->
+<section id="tools" class="py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">All Tools</h2>
+      <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Browse our collection of free online tools. All tools run entirely in your browser - your data never leaves your device.
+      </p>
+    </div>
+    
+    <!-- Category Filter -->
+    <div class="flex flex-wrap justify-center gap-2 mb-8">
+      <button class="px-4 py-2 rounded-full text-sm font-medium bg-primary-600 text-white">
+        All Tools
+      </button>
+      {#each categories as category}
+        <a href="/tools/{category.toLowerCase()}" class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+          {category}
+        </a>
+      {/each}
+    </div>
+    
+    <!-- Tools Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {#each tools as tool}
+        <a href={tool.href} class="card group hover:border-primary-500 dark:hover:border-primary-500 border border-transparent">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 group-hover:bg-primary-600 dark:group-hover:bg-primary-600 group-hover:text-white transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {@html getIconSVG(tool.icon)}
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {tool.name}
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+                {tool.description}
+              </p>
+              <span class="inline-block mt-2 text-xs font-medium px-2 py-1 rounded-full {getCategoryColor(tool.category)}">
+                {tool.category}
+              </span>
+            </div>
+          </div>
+        </a>
+      {/each}
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="bg-gray-50 dark:bg-gray-800 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why NexusTools?</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Privacy First</h3>
+        <p class="text-gray-600 dark:text-gray-400">All tools run client-side. Your data never leaves your browser.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Lightning Fast</h3>
+        <p class="text-gray-600 dark:text-gray-400">No server roundtrips. Instant results right in your browser.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">100% Free</h3>
+        <p class="text-gray-600 dark:text-gray-400">No subscriptions, no hidden fees. Free forever.</p>
+      </div>
+    </div>
+  </div>
+</section>
